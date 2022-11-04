@@ -89,6 +89,7 @@ img {
 }
 
 .backtodo {
+  width: 80%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -96,8 +97,25 @@ img {
   gap: 10px;
 }
 
-.backtodo input {
+.check {
   cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.change {
+  width: 100%;
+}
+
+.editinputchange {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgb(180, 178, 178);
+  border-radius: 5px;
+  font-style: italic;
+  font-size: 15px;
 }
 
 .clear {
@@ -140,4 +158,28 @@ img {
   transform: rotate(90deg);
   font-size: 25px;
   cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+
+.removebtn button {
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+  padding: 0 10px 0 0;
+  font-size: 20px;
+}
+
+.makechange button {
+  border: none;
+  padding: 0 2px 0 0;
+  cursor: pointer;
+  font-size: 30px;
+  background-color: #fff;
+}
+
+.flex-end {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
