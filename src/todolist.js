@@ -1,4 +1,3 @@
-
 const tomake = document.getElementById('firstidoftodo');
 const clearall = document.getElementById('clearbutton');
 
@@ -72,14 +71,13 @@ function displaytodolist() {
 
 clearall.addEventListener('click', () => {
   for (let i = 0; i < Listiftodo.length; i += 1) {
-    if(Listiftodo[i].completed === true){
+    if (Listiftodo[i].completed === true) {
       Listiftodo.splice(i, 1);
       localStorage.setItem('containertodo', JSON.stringify(Listiftodo));
       displaytodolist();
-    }}
+    }
   }
-); 
-
+});
 
 btns.addEventListener('click', (e) => {
   e.preventDefault();
