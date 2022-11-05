@@ -14,6 +14,8 @@ In this project, you will add some functionality to your application to make it 
 - Implement a function for the "Clear all completed" button (use `filter()` method).
 - Store the updated array of items in local storage, so the user gets the correct list values after the page reloads.
 
+## Live Demo
+[TodoList](https://whitewolfx99.github.io/todolist/)
 
 ## Built With
 
