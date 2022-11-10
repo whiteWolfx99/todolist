@@ -1,5 +1,5 @@
 import setaddtodo from './setaddtodo.js';
-
+import setromovebyid from './setremove.js';
 const tomake = document.getElementById('firstidoftodo');
 const clearall = document.getElementById('clearbutton');
 const Listiftodo = localStorage.getItem('containertodo') !== null ? JSON.parse(localStorage.getItem('containertodo')) : [];
@@ -48,9 +48,7 @@ function removing() {
     });
   }
 }
-export function setromovebyid(object, clear) {
-  return object.splice(object.indexOf(clear), 1);
-}
+
 
 // editing
 function editing() {
