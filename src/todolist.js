@@ -1,11 +1,20 @@
 import setaddtodo from './setaddtodo.js';
 import setromovebyid from './setremove.js';
+
 const tomake = document.getElementById('firstidoftodo');
 const clearall = document.getElementById('clearbutton');
 const Listiftodo = localStorage.getItem('containertodo') !== null ? JSON.parse(localStorage.getItem('containertodo')) : [];
 let Id = Listiftodo.length;
 const inputs = document.getElementById('inputvalue');
 const btns = document.getElementById('addlist');
+
+export function setediting(setdesc, i) {
+  setdesc.description = document.querySelectorAll('.editinputchange')[i].value;
+}
+
+export function setCompleted(item) {
+  item.completed = !item.completed;
+}
 
 const displaytodolist = () => {
   tomake.innerHTML = '';
@@ -34,12 +43,7 @@ const displaytodolist = () => {
       `;
     });
   }
-  removing();
-  editing();
-  checking();
-};
-// removing
-function removing() {
+
   for (let i = 0; i < document.querySelectorAll('.remove').length; i += 1) {
     document.querySelectorAll('.remove')[i].addEventListener('click', () => {
       setromovebyid(Listiftodo, Listiftodo[i]);
@@ -47,11 +51,7 @@ function removing() {
       displaytodolist();
     });
   }
-}
 
-
-// editing
-function editing() {
   for (let i = 0; i < document.querySelectorAll('.edit').length; i += 1) {
     document.querySelectorAll('.edit')[i].addEventListener('click', () => {
       document.querySelectorAll('.change')[i].classList.remove('hidden');
@@ -59,8 +59,7 @@ function editing() {
       document.querySelectorAll('.edit')[i].classList.add('hidden');
       document.querySelectorAll('.description')[i].classList.add('hidden');
       document
-        .querySelectorAll('.editinputchange')
-        [i].addEventListener('keypress', (e) => {
+        .querySelectorAll('.editinputchange')[i].addEventListener('keypress', (e) => {
           if (e.key === 'Enter') {
             setediting(Listiftodo[i], i);
             localStorage.setItem('containertodo', JSON.stringify(Listiftodo));
@@ -69,14 +68,7 @@ function editing() {
         });
     });
   }
-}
-// set editing
-export function setediting(setdesc, i) {
-  setdesc.description = document.querySelectorAll('.editinputchange')[i].value;
-}
 
-// checking
-function checking() {
   for (let i = 0; i < document.querySelectorAll('.check').length; i += 1) {
     document.querySelectorAll('.check')[i].addEventListener('change', () => {
       setCompleted(Listiftodo[i]);
@@ -84,10 +76,10 @@ function checking() {
       displaytodolist();
     });
   }
-}
-// set checking
-export function setCompleted(item) {
-  return (item.completed = !item.completed);
+};
+
+export function setclearall(clear, i) {
+  return clear.splice(i, 1);
 }
 // clear all
 function clearallfunction() {
@@ -98,10 +90,6 @@ function clearallfunction() {
       displaytodolist();
     }
   }
-}
-// set clear all
-export function setclearall(clear, i) {
-  return clear.splice(i, 1);
 }
 
 // add list
