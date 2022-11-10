@@ -1,18 +1,18 @@
 import setaddtodo from './setaddtodo.js';
 
-const tomake = document.getElementById("firstidoftodo");
-const clearall = document.getElementById("clearbutton");
-const Listiftodo = localStorage.getItem("containertodo") !== null ? JSON.parse(localStorage.getItem('containertodo')) : [];
+const tomake = document.getElementById('firstidoftodo');
+const clearall = document.getElementById('clearbutton');
+const Listiftodo = localStorage.getItem('containertodo') !== null ? JSON.parse(localStorage.getItem('containertodo')) : [];
 let Id = Listiftodo.length;
-const inputs = document.getElementById("inputvalue");
-const btns = document.getElementById("addlist");
+const inputs = document.getElementById('inputvalue');
+const btns = document.getElementById('addlist');
 
 const displaytodolist = () => {
-  tomake.innerHTML = "";
+  tomake.innerHTML = '';
 
   if (Listiftodo !== null) {
     Listiftodo.forEach((Listiftodo) => {
-      const checkiftrue = Listiftodo.completed === true ? "checked" : "";
+      const checkiftrue = Listiftodo.completed === true ? 'checked' : '';
       tomake.innerHTML += `
       <div class="containertodo">
         <div class="backtodo">
@@ -38,12 +38,12 @@ const displaytodolist = () => {
   editing();
   checking();
 };
-//removing
+// removing
 function removing() {
-  for (let i = 0; i < document.querySelectorAll(".remove").length; i += 1) {
-    document.querySelectorAll(".remove")[i].addEventListener("click", () => {
+  for (let i = 0; i < document.querySelectorAll('.remove').length; i += 1) {
+    document.querySelectorAll('.remove')[i].addEventListener('click', () => {
       setromovebyid(Listiftodo, Listiftodo[i]);
-      localStorage.setItem("containertodo", JSON.stringify(Listiftodo));
+      localStorage.setItem('containertodo', JSON.stringify(Listiftodo));
       displaytodolist();
     });
   }
@@ -54,18 +54,18 @@ export function setromovebyid(object, clear) {
 
 // editing
 function editing() {
-  for (let i = 0; i < document.querySelectorAll(".edit").length; i += 1) {
-    document.querySelectorAll(".edit")[i].addEventListener("click", () => {
-      document.querySelectorAll(".change")[i].classList.remove("hidden");
-      document.querySelectorAll(".removebtn")[i].classList.remove("hidden");
-      document.querySelectorAll(".edit")[i].classList.add("hidden");
-      document.querySelectorAll(".description")[i].classList.add("hidden");
+  for (let i = 0; i < document.querySelectorAll('.edit').length; i += 1) {
+    document.querySelectorAll('.edit')[i].addEventListener('click', () => {
+      document.querySelectorAll('.change')[i].classList.remove('hidden');
+      document.querySelectorAll('.removebtn')[i].classList.remove('hidden');
+      document.querySelectorAll('.edit')[i].classList.add('hidden');
+      document.querySelectorAll('.description')[i].classList.add('hidden');
       document
-        .querySelectorAll(".editinputchange")
-        [i].addEventListener("keypress", (e) => {
-          if (e.key === "Enter") {
+        .querySelectorAll('.editinputchange')
+        [i].addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
             setediting(Listiftodo[i], i);
-            localStorage.setItem("containertodo", JSON.stringify(Listiftodo));
+            localStorage.setItem('containertodo', JSON.stringify(Listiftodo));
             displaytodolist();
           }
         });
@@ -74,15 +74,15 @@ function editing() {
 }
 // set editing
 export function setediting(setdesc, i) {
-  setdesc.description = document.querySelectorAll(".editinputchange")[i].value;
+  setdesc.description = document.querySelectorAll('.editinputchange')[i].value;
 }
 
 // checking
 function checking() {
-  for (let i = 0; i < document.querySelectorAll(".check").length; i += 1) {
-    document.querySelectorAll(".check")[i].addEventListener("change", () => {
+  for (let i = 0; i < document.querySelectorAll('.check').length; i += 1) {
+    document.querySelectorAll('.check')[i].addEventListener('change', () => {
       setCompleted(Listiftodo[i]);
-      localStorage.setItem("containertodo", JSON.stringify(Listiftodo));
+      localStorage.setItem('containertodo', JSON.stringify(Listiftodo));
       displaytodolist();
     });
   }
@@ -96,7 +96,7 @@ function clearallfunction() {
   for (let i = 0; i < Listiftodo.length; i += 1) {
     if (Listiftodo[i].completed === true) {
       setclearall(Listiftodo, i);
-      localStorage.setItem("containertodo", JSON.stringify(Listiftodo));
+      localStorage.setItem('containertodo', JSON.stringify(Listiftodo));
       displaytodolist();
     }
   }
@@ -109,16 +109,15 @@ export function setclearall(clear, i) {
 // add list
 function addtodo() {
   const newvalue = inputs.value;
-  inputs.value = "";
+  inputs.value = '';
   Id += 1;
-  const addtesttodo = setaddtodo({Id: Id, description: newvalue, completed: false}, Listiftodo );
-  localStorage.setItem("containertodo", JSON.stringify(addtesttodo));
+  const addtesttodo = setaddtodo({ Id, description: newvalue, completed: false }, Listiftodo);
+  localStorage.setItem('containertodo', JSON.stringify(addtesttodo));
   displaytodolist();
 }
 
-
-clearall.addEventListener("click", clearallfunction);
-btns.addEventListener("click", addtodo);
-document.addEventListener("DOMContentLoaded", displaytodolist, false);
+clearall.addEventListener('click', clearallfunction);
+btns.addEventListener('click', addtodo);
+document.addEventListener('DOMContentLoaded', displaytodolist, false);
 
 module.exports = setromovebyid;
