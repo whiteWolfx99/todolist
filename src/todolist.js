@@ -1,21 +1,21 @@
-const tomake = document.getElementById('firstidoftodo');
-const clearall = document.getElementById('clearbutton');
+const tomake = document.getElementById("firstidoftodo");
+const clearall = document.getElementById("clearbutton");
+const checkiftrue = document.querySelectorAll(".check");
 
 const Listiftodo =
-  localStorage.getItem('containertodo') !== null
-    ? JSON.parse(localStorage.getItem('containertodo'))
+  localStorage.getItem("containertodo") !== null
+    ? JSON.parse(localStorage.getItem("containertodo"))
     : [];
-let Id =
-  Listiftodo.length > 0 ? Listiftodo[Listiftodo.length - 1].index + 1 : 0;
-const inputs = document.getElementById('inputvalue');
-const btns = document.getElementById('addlist');
+let Id = Listiftodo.length;
+const inputs = document.getElementById("inputvalue");
+const btns = document.getElementById("addlist");
 
 const displaytodolist = () => {
-  tomake.innerHTML = '';
+  tomake.innerHTML = "";
 
   if (Listiftodo !== null) {
     Listiftodo.forEach((Listiftodo) => {
-      const checkiftrue = Listiftodo.completed === true ? 'checked' : '';
+      const checkiftrue = Listiftodo.completed === true ? "checked" : "";
       tomake.innerHTML += `
       <div class="containertodo">
         <div class="backtodo">
@@ -37,67 +37,94 @@ const displaytodolist = () => {
       `;
     });
   }
-
-  for (let i = 0; i < document.querySelectorAll('.remove').length; i += 1) {
-    document.querySelectorAll('.remove')[i].addEventListener('click', () => {
-      Listiftodo.splice(i, 1);
-      localStorage.setItem('containertodo', JSON.stringify(Listiftodo));
+  removing();
+  editing();
+  checking();
+};
+//removing
+function removing() {
+  for (let i = 0; i < document.querySelectorAll(".remove").length; i += 1) {
+    document.querySelectorAll(".remove")[i].addEventListener("click", () => {
+      setromovebyid(Listiftodo, Listiftodo[i])
+      localStorage.setItem("containertodo", JSON.stringify(Listiftodo));
       displaytodolist();
     });
   }
-  for (let i = 0; i < document.querySelectorAll('.edit').length; i += 1) {
-    document.querySelectorAll('.edit')[i].addEventListener('click', () => {
-      document.querySelectorAll('.change')[i].classList.remove('hidden');
-      document.querySelectorAll('.removebtn')[i].classList.remove('hidden');
-      document.querySelectorAll('.edit')[i].classList.add('hidden');
-      document.querySelectorAll('.description')[i].classList.add('hidden');
-      document
-        .querySelectorAll('.editinputchange')
-        [i].addEventListener('keypress', (e) => {
-          if (e.key === 'Enter') {
-            Listiftodo[i].description =
-              document.querySelectorAll('.editinputchange')[i].value;
-            localStorage.setItem('containertodo', JSON.stringify(Listiftodo));
+}
+function setromovebyid(object, clear) {
+  return object.splice(object.indexOf(clear), 1);
+}
+
+// editing
+function editing() {
+  for (let i = 0; i < document.querySelectorAll(".edit").length; i += 1) {
+    document.querySelectorAll(".edit")[i].addEventListener("click", () => {
+      document.querySelectorAll(".change")[i].classList.remove("hidden");
+      document.querySelectorAll(".removebtn")[i].classList.remove("hidden");
+      document.querySelectorAll(".edit")[i].classList.add("hidden");
+      document.querySelectorAll(".description")[i].classList.add("hidden");
+      document.querySelectorAll(".editinputchange")
+        [i].addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            setediting(Listiftodo[i], i);
+            localStorage.setItem("containertodo", JSON.stringify(Listiftodo));
             displaytodolist();
           }
         });
     });
   }
-  for (let i = 0; i < document.querySelectorAll('.check').length; i += 1) {
-    document.querySelectorAll('.check')[i].addEventListener('change', () => {
-      if (document.querySelectorAll('.check')[i].checked === true) {
-        Listiftodo[i].completed = true;
-      } else {
-        Listiftodo[i].completed = false;
-      }
-      localStorage.setItem('containertodo', JSON.stringify(Listiftodo));
+}
+
+function setediting(setdesc, i) {
+  setdesc.description = document.querySelectorAll(".editinputchange")[i].value;
+}
+
+
+// checking
+function checking() {
+  for (let i = 0; i < document.querySelectorAll(".check").length; i += 1) {
+    document.querySelectorAll(".check")[i].addEventListener("change", () => {
+      setCompleted(Listiftodo[i]);
+      localStorage.setItem("containertodo", JSON.stringify(Listiftodo));
       displaytodolist();
     });
   }
-};
-
-clearall.addEventListener('click', () => {
+}
+// set checking
+function setCompleted(item) {
+  return (item.completed = !item.completed);
+}
+// clear all
+function clearallfunction() {
   for (let i = 0; i < Listiftodo.length; i += 1) {
     if (Listiftodo[i].completed === true) {
-      Listiftodo.splice(i, 1);
+      setclearall(Listiftodo, i);
       localStorage.setItem('containertodo', JSON.stringify(Listiftodo));
       displaytodolist();
     }
   }
-});
+}
 
-btns.addEventListener('click', (e) => {
-  e.preventDefault();
-  const newvalue = document.getElementById('inputvalue').value;
-  inputs.value = '';
+function setclearall(clear, i) {
+  return clear.splice(i, 1);
+}
+
+// add list
+function addtodo() {
+  const newvalue = document.getElementById("inputvalue").value;
+  inputs.value = "";
   Id += 1;
   Listiftodo.push({
     Id,
     description: newvalue,
     completed: false,
   });
-  localStorage.setItem('containertodo', JSON.stringify(Listiftodo));
+  localStorage.setItem("containertodo", JSON.stringify(Listiftodo));
   displaytodolist();
-});
+}
 
-document.addEventListener('DOMContentLoaded', displaytodolist, false);
+
+
+clearall.addEventListener("click", clearallfunction);
+btns.addEventListener("click", addtodo);
+document.addEventListener("DOMContentLoaded", displaytodolist, false);
