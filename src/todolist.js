@@ -1,11 +1,8 @@
+import setaddtodo from './setaddtodo.js';
+
 const tomake = document.getElementById("firstidoftodo");
 const clearall = document.getElementById("clearbutton");
-const checkiftrue = document.querySelectorAll(".check");
-
-const Listiftodo =
-  localStorage.getItem("containertodo") !== null
-    ? JSON.parse(localStorage.getItem("containertodo"))
-    : [];
+const Listiftodo = localStorage.getItem("containertodo") !== null ? JSON.parse(localStorage.getItem('containertodo')) : [];
 let Id = Listiftodo.length;
 const inputs = document.getElementById("inputvalue");
 const btns = document.getElementById("addlist");
@@ -51,7 +48,7 @@ function removing() {
     });
   }
 }
-function setromovebyid(object, clear) {
+export function setromovebyid(object, clear) {
   return object.splice(object.indexOf(clear), 1);
 }
 
@@ -76,7 +73,7 @@ function editing() {
   }
 }
 // set editing
-function setediting(setdesc, i) {
+export function setediting(setdesc, i) {
   setdesc.description = document.querySelectorAll(".editinputchange")[i].value;
 }
 
@@ -91,7 +88,7 @@ function checking() {
   }
 }
 // set checking
-function setCompleted(item) {
+export function setCompleted(item) {
   return (item.completed = !item.completed);
 }
 // clear all
@@ -105,28 +102,23 @@ function clearallfunction() {
   }
 }
 // set clear all
-function setclearall(clear, i) {
+export function setclearall(clear, i) {
   return clear.splice(i, 1);
 }
 
 // add list
 function addtodo() {
-  const newvalue = document.getElementById("inputvalue").value;
+  const newvalue = inputs.value;
   inputs.value = "";
   Id += 1;
-  setaddtodo(newvalue, Id);
-  localStorage.setItem("containertodo", JSON.stringify(Listiftodo));
+  const addtesttodo = setaddtodo({Id: Id, description: newvalue, completed: false}, Listiftodo );
+  localStorage.setItem("containertodo", JSON.stringify(addtesttodo));
   displaytodolist();
 }
-// set add list
-function setaddtodo(value, Id) {
-  Listiftodo.push({
-    Id,
-    description: value,
-    completed: false,
-  });
-}
+
 
 clearall.addEventListener("click", clearallfunction);
 btns.addEventListener("click", addtodo);
 document.addEventListener("DOMContentLoaded", displaytodolist, false);
+
+module.exports = setromovebyid;
