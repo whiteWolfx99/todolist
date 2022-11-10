@@ -45,7 +45,7 @@ const displaytodolist = () => {
 function removing() {
   for (let i = 0; i < document.querySelectorAll(".remove").length; i += 1) {
     document.querySelectorAll(".remove")[i].addEventListener("click", () => {
-      setromovebyid(Listiftodo, Listiftodo[i])
+      setromovebyid(Listiftodo, Listiftodo[i]);
       localStorage.setItem("containertodo", JSON.stringify(Listiftodo));
       displaytodolist();
     });
@@ -63,7 +63,8 @@ function editing() {
       document.querySelectorAll(".removebtn")[i].classList.remove("hidden");
       document.querySelectorAll(".edit")[i].classList.add("hidden");
       document.querySelectorAll(".description")[i].classList.add("hidden");
-      document.querySelectorAll(".editinputchange")
+      document
+        .querySelectorAll(".editinputchange")
         [i].addEventListener("keypress", (e) => {
           if (e.key === "Enter") {
             setediting(Listiftodo[i], i);
@@ -74,11 +75,10 @@ function editing() {
     });
   }
 }
-
+// set editing
 function setediting(setdesc, i) {
   setdesc.description = document.querySelectorAll(".editinputchange")[i].value;
 }
-
 
 // checking
 function checking() {
@@ -99,12 +99,12 @@ function clearallfunction() {
   for (let i = 0; i < Listiftodo.length; i += 1) {
     if (Listiftodo[i].completed === true) {
       setclearall(Listiftodo, i);
-      localStorage.setItem('containertodo', JSON.stringify(Listiftodo));
+      localStorage.setItem("containertodo", JSON.stringify(Listiftodo));
       displaytodolist();
     }
   }
 }
-
+// set clear all
 function setclearall(clear, i) {
   return clear.splice(i, 1);
 }
@@ -114,16 +114,18 @@ function addtodo() {
   const newvalue = document.getElementById("inputvalue").value;
   inputs.value = "";
   Id += 1;
-  Listiftodo.push({
-    Id,
-    description: newvalue,
-    completed: false,
-  });
+  setaddtodo(newvalue, Id);
   localStorage.setItem("containertodo", JSON.stringify(Listiftodo));
   displaytodolist();
 }
-
-
+// set add list
+function setaddtodo(value, Id) {
+  Listiftodo.push({
+    Id,
+    description: value,
+    completed: false,
+  });
+}
 
 clearall.addEventListener("click", clearallfunction);
 btns.addEventListener("click", addtodo);
