@@ -2,6 +2,7 @@ import setaddtodo from './setaddtodo.js';
 import setromovebyid from './setremove.js';
 import setediting from './edit.js';
 import setCompleted from './check.js';
+import setclearall from './clearall.js';
 
 const tomake = document.getElementById('firstidoftodo');
 const clearall = document.getElementById('clearbutton');
@@ -72,9 +73,6 @@ const displaytodolist = () => {
   }
 };
 
-export function setclearall(clear, i) {
-  return clear.splice(i, 1);
-}
 // clear all
 function clearallfunction() {
   for (let i = 0; i < Listiftodo.length; i += 1) {
