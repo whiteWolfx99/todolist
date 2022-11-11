@@ -1,6 +1,6 @@
 function setediting(setdesc, input, i) {
-    setdesc[i].description = input;
-    return setdesc;
-  }
+  setdesc[i].description = input;
+  return setdesc;
+}
 
-  module.exports = setediting;
+module.exports = setediting;

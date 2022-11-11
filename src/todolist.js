@@ -9,7 +9,6 @@ let Id = Listiftodo.length;
 const inputs = document.getElementById('inputvalue');
 const btns = document.getElementById('addlist');
 
-
 export function setCompleted(item) {
   item.completed = !item.completed;
 }
@@ -60,7 +59,6 @@ const displaytodolist = () => {
         .querySelectorAll('.editinputchange')[i].addEventListener('keypress', (e) => {
           if (e.key === 'Enter') {
             setediting(Listiftodo, e.target.value, i);
-            console.log(e.target.value);
             localStorage.setItem('containertodo', JSON.stringify(Listiftodo));
             displaytodolist();
           }
