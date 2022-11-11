@@ -3,7 +3,7 @@
  */
 const setediting = require('./edit.js');
 const setCompleted = require('./check.js');
-// const setclearall = require("./clearall.js");
+const setclearall = require('./clearall.js');
 
 describe('Listiftodo part 2', () => {
   test('clearall todo', () => {
@@ -32,8 +32,10 @@ describe('Listiftodo part 2', () => {
     expect(JSON.parse(localStorage.getItem('containertodo'))).toEqual(done);
     document.body.innerHTML = '';
     for (let i = 0; i < done.length; i += 1) {
-      document.body.innerHTML +=
-        '<div class="home">' + '  <ul id="editlist"><li></li></ul>' + '</div>';
+      document.body.innerHTML
+      += '<div class="home">'
+      + '<ul id="editlist"><li></li></ul>'
+      + '</div>';
     }
     const editlist = document.querySelectorAll('.home');
     expect(editlist).toHaveLength(done.length);
@@ -70,8 +72,10 @@ describe('Listiftodo part 2', () => {
     expect(JSON.parse(localStorage.getItem('containertodo'))).toEqual(done);
     document.body.innerHTML = '';
     for (let i = 0; i < done.length; i += 1) {
-      document.body.innerHTML +=
-        '<div class="home">' + '  <ul id="editlist"><li></li></ul>' + '</div>';
+      document.body.innerHTML
+      += '<div class="home">'
+      + '  <ul id="editlist"><li></li></ul>'
+      + '</div>';
     }
     const editlist = document.querySelectorAll('.home');
     expect(editlist).toHaveLength(done.length);
@@ -108,8 +112,10 @@ describe('Listiftodo part 2', () => {
     expect(JSON.parse(localStorage.getItem('containertodo'))).toEqual(done);
     document.body.innerHTML = '';
     for (let i = 0; i < done.length; i += 1) {
-      document.body.innerHTML +=
-        '<div class="home">' + '  <ul id="editlist"><li></li></ul>' + '</div>';
+      document.body.innerHTML
+      += '<div class="home">'
+      + '  <ul id="editlist"><li></li></ul>'
+      + '</div>';
     }
     const editlist = document.querySelectorAll('.home');
     expect(editlist).toHaveLength(done.length);
