@@ -1,5 +1,6 @@
 import setaddtodo from './setaddtodo.js';
 import setromovebyid from './setremove.js';
+import setediting from './edit.js';
 
 const tomake = document.getElementById('firstidoftodo');
 const clearall = document.getElementById('clearbutton');
@@ -7,10 +8,6 @@ const Listiftodo = localStorage.getItem('containertodo') !== null ? JSON.parse(l
 let Id = Listiftodo.length;
 const inputs = document.getElementById('inputvalue');
 const btns = document.getElementById('addlist');
-
-export function setediting(setdesc, i) {
-  setdesc.description = document.querySelectorAll('.editinputchange')[i].value;
-}
 
 export function setCompleted(item) {
   item.completed = !item.completed;
@@ -61,7 +58,7 @@ const displaytodolist = () => {
       document
         .querySelectorAll('.editinputchange')[i].addEventListener('keypress', (e) => {
           if (e.key === 'Enter') {
-            setediting(Listiftodo[i], i);
+            setediting(Listiftodo, e.target.value, i);
             localStorage.setItem('containertodo', JSON.stringify(Listiftodo));
             displaytodolist();
           }
